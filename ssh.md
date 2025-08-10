@@ -103,9 +103,31 @@ Once key authentication works:
    PasswordAuthentication no
    PermitRootLogin no
    ```
-   (Remove `#` if present)
+   (Remove `#` if present to uncomment)
 
-3. **Restart SSH service:**
+3. **Check for additional configuration files** (some systems use includes):
+   ```bash
+   # Look for Include directives in main config
+   grep -i "^Include" /etc/ssh/sshd_config
+   
+   # Common additional locations to check
+   ls /etc/ssh/sshd_config.d/
+   ls /etc/ssh/conf.d/
+   ```
+
+4. **If additional config files exist**, edit them too:
+   ```bash
+   sudo nano /etc/ssh/sshd_config.d/50-cloud-init.conf
+   # Or whatever files were found above
+   ```
+
+5. **Verify your configuration:**
+   ```bash
+   sudo sshd -t
+   ```
+   (Should return no errors)
+
+6. **Restart SSH service:**
    ```bash
    sudo systemctl restart sshd
    ```
