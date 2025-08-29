@@ -44,6 +44,12 @@ ssh-copy-id username@your_server_ip
 
 Enter your VPS password when prompted. This will be the last time you need it.
 
+## Or PowerShell command for Windows
+
+```
+Get-Content ~/.ssh/id_rsa.pub | ssh root@91.99.7.68 "mkdir -p .ssh && cat >> .ssh/authorized_keys"
+```
+
 ### Method 2: Manual Copy (Windows or if ssh-copy-id unavailable)
 
 1. **Display your public key locally:**
